@@ -1,5 +1,6 @@
 package com.acme.offirent.configuration.authentication;
 
+import com.acme.offirent.domain.service.DefaultUserDetailsService;
 import com.acme.offirent.util.JwtCenter;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;

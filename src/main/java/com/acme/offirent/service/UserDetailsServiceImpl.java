@@ -2,7 +2,7 @@ package com.acme.offirent.service;
 
 import com.acme.offirent.domain.model.Account;
 import com.acme.offirent.domain.repository.AccountRepository;
-import com.acme.offirent.domain.service.DefaultUserDetailService;
+import com.acme.offirent.domain.service.DefaultUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserDetailServiceImpl implements DefaultUserDetailService {
+public class UserDetailsServiceImpl implements DefaultUserDetailsService {
 
     @Autowired
     private AccountRepository accountRepository;
