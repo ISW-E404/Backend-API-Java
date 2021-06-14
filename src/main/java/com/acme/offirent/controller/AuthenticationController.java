@@ -17,6 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Objects;
 
 @RestController
@@ -39,7 +40,7 @@ public class AuthenticationController {
     })
     @PostMapping
     public ResponseEntity<?> generateAuthenticationToken(
-            @RequestBody AuthenticationRequest request)
+            @Valid @RequestBody AuthenticationRequest request)
             throws Exception {
         authenticate(request.getUsername(), request.getPassword());
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
