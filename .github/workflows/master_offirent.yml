@@ -58,20 +58,13 @@ jobs:
     
     runs-on: ubuntu-latest 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@master
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
+    - uses: actions/checkout@master
+    - name: Create a Release
+      uses: elgohr/Github-Release-Action@master
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: v ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        body: |
-          New changes have been made 
-        draft: false
-        prerelease: false
+        args: MyReleaseMessage
         
   deploy-production:
     needs: deploy-staging
