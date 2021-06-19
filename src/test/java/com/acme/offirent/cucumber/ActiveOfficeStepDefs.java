@@ -44,7 +44,7 @@ public class ActiveOfficeStepDefs {
     private OfficeService officeService;
 
     public Department department = new Department(1L,"asas");
-    public District district = new District(1L,"sdsd",department);
+    public District district = new District(1L,"sdsd");
     public Discount discount = new Discount(1L,30.3F,"sdsd");
     public Account account= new Account(2L,"hola","assa","dni",1L,"sdsd","asa",121313L,true,discount);
     public Office office= new Office(1L,"dsd",1L,12L,true,5.0F,"sdsd",30.3F,true,"sds",district,account);
@@ -86,6 +86,8 @@ public class ActiveOfficeStepDefs {
     @Test
     @When("Offi-provider clicks in Activate Product")
     public void offiProviderClicksInActivateProduct() {
+
+        when(officeRepository.save(office)).thenReturn(office);
         when(officeRepository.findById(officeId)).thenReturn(Optional.of(office));
         when(accountRepository.findById(accountId)).thenReturn(Optional.of(account));
         officeService.activeOffice(accountId,officeId);
@@ -97,6 +99,7 @@ public class ActiveOfficeStepDefs {
         office.setStatus(false);
         account.setPremium(true);
 
+        when(officeRepository.save(office)).thenReturn(office);
         when(officeRepository.findById(officeId)).thenReturn(Optional.of(office));
         when(accountRepository.findById(accountId)).thenReturn(Optional.of(account));
         assertThat(officeService.activeOffice(accountId,officeId).isStatus()).isTrue();
