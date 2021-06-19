@@ -46,9 +46,9 @@ public class ReservationsController {
         return resources;
     }
 
-    @Operation(summary = "Get all reservations by Account",description = "Get all reservations by given AccountId",tags = {"accounts"})
+    @Operation(summary = "Get all reservations by Office",description = "Get all reservations by given OfficeId",tags = {"accounts"})
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Get all reservations by given AccountId",content =@Content(mediaType = "application/json") )
+            @ApiResponse(responseCode = "200", description = "Get all reservations by given OfficeId",content =@Content(mediaType = "application/json") )
     })
     @GetMapping("/offices/{officeId}/reservations")
     public List<ReservationResource> getAllReservationsByOfficeId(
