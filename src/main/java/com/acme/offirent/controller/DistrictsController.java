@@ -81,6 +81,16 @@ public class DistrictsController {
                 districtService.createDistrict(convertToEntity(resource),departmentId));
     }*/
 
+    @Operation(summary = "Create District ",description = "Enter a new District at register",tags = {"districts"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Enter a new District for given information",content =@Content(mediaType = "application/json") )
+    })
+    @PostMapping("/districts")
+    public DistrictResource createDistrict(@Valid @RequestBody SaveDistrictResource resource){
+        return convertToResource(
+                districtService.createDistrict(convertToEntity(resource)));
+    }
+
     @Operation(summary = "Delete District",description = "Delete District for given Id at register",tags = {"districts"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Delete District for given Id",content =@Content(mediaType = "application/json") )
