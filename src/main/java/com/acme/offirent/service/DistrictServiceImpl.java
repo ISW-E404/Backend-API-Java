@@ -59,4 +59,6 @@ public class DistrictServiceImpl implements DistrictService {
             return ResponseEntity.ok().build();
         }).orElseThrow(()->new ResourceNotFoundException("District","Id",districtId));
     }
+
+
 }

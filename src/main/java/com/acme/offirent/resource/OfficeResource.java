@@ -1,5 +1,6 @@
 package com.acme.offirent.resource;
 
+import com.acme.offirent.domain.model.District;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,5 +20,5 @@ public class OfficeResource {
     private float price;
     private boolean status;
     private String comment;
-
+    private District district;
 }

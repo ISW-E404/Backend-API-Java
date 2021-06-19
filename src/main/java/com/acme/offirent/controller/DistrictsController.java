@@ -57,7 +57,7 @@ public class DistrictsController {
         return resources;
     }
 
-    @Operation(summary = "Get all districts by Department",description = "Get all districts by given DepartmentId",tags = {"departments"})
+    /*@Operation(summary = "Get all districts by Department",description = "Get all districts by given DepartmentId",tags = {"departments"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Get all districts by given DepartmentId",content =@Content(mediaType = "application/json") )
     })
@@ -79,7 +79,7 @@ public class DistrictsController {
     public DistrictResource createDistrict(@PathVariable(name = "departmentId") Long departmentId,@Valid @RequestBody SaveDistrictResource resource){
         return convertToResource(
                 districtService.createDistrict(convertToEntity(resource),departmentId));
-    }
+    }*/
 
     @Operation(summary = "Delete District",description = "Delete District for given Id at register",tags = {"districts"})
     @ApiResponses(value = {
