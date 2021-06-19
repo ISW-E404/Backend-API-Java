@@ -27,8 +27,8 @@ public class District {
     @Size(max = 100)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+   /* @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="department_id", nullable = false)
     @JsonIgnore
-    private Department department;
+    private Department department;*/
 }
