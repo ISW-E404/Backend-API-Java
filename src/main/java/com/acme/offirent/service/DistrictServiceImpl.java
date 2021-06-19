@@ -43,7 +43,7 @@ public class DistrictServiceImpl implements DistrictService {
             throw  new ResourceNotFoundException("Department","Id",departmentId);
         return districtRepository.findAllByDepartmentId(departmentId,pageable);
     }
-
+/*
     @Override
     public District createDistrict(District district,Long departmentId) {
         return departmentRepository.findById(departmentId).map(department -> {
@@ -51,6 +51,10 @@ public class DistrictServiceImpl implements DistrictService {
             return districtRepository.save(district);
         }).orElseThrow(()->new ResourceNotFoundException("Department","Id",departmentId));
     }
+*/
+
+    public District createDistrict(District district) {return districtRepository.save(district);}
+
 
     @Override
     public ResponseEntity<?> deleteDistrict(Long districtId) {
