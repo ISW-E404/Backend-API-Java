@@ -106,6 +106,8 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     public Office updateOffice(Long officeId, Office officeRequest) {
         return officeRepository.findById(officeId).map(office->{
+            office.setName(officeRequest.getName());
+            office.setImage(officeRequest.getImage());
             office.setAddress(officeRequest.getAddress());
             office.setFloor(officeRequest.getFloor());
             office.setCapacity(officeRequest.getCapacity());

@@ -11,6 +11,8 @@ import javax.validation.constraints.NotNull;
 public class OfficeResource {
 
     private Long id;
+    private String name;
+    private String image;
     private String address;
     private Long floor;
     private Long capacity;

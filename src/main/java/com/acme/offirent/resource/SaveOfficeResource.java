@@ -17,6 +17,12 @@ public class SaveOfficeResource {
     private String address;
 
     @NotNull
+    private String name;
+
+    @NotNull
+    private String image;
+
+    @NotNull
     private Long floor;
 
     @NotNull

@@ -26,6 +26,12 @@ public class Office {
     private Long id;
 
     @NotNull
+    private String name;
+
+    @NotNull
+    private String image;
+
+    @NotNull
     private String address;
 
     @NotNull

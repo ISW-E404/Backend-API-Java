@@ -47,7 +47,7 @@ public class ActiveOfficeStepDefs {
     public District district = new District(1L,"sdsd");
     public Discount discount = new Discount(1L,30.3F,"sdsd");
     public Account account= new Account(2L,"hola","assa","dni",1L,"sdsd","asa",121313L,true,discount);
-    public Office office= new Office(1L,"dsd",1L,12L,true,5.0F,"sdsd",30.3F,true,"sds",district,account);
+    public Office office= new Office(1L,"Los portales","URL_IMAGE","dsd",1L,12L,true,5.0F,"sdsd",30.3F,true,"sds",district,account);
     public Long officeId = 1L;
     public Long accountId = 2L;
 
