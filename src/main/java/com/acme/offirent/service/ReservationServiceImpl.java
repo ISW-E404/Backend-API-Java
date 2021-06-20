@@ -59,7 +59,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public ResponseEntity<?> deleteReservation(Long reservationId, Long accountId) {
+    public ResponseEntity<?> deleteReservation(Long accountId, Long reservationId) {
         if(!accountRepository.existsById(accountId))
             throw new ResourceNotFoundException("Account","Id", accountId);
 
