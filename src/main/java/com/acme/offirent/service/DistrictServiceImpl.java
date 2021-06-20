@@ -36,13 +36,15 @@ public class DistrictServiceImpl implements DistrictService {
         return districtRepository.findAll(pageable);
     }
 
-
+/*
     @Override
     public Page<District> getAllDistrictsByDepartmentId(Long departmentId, Pageable pageable) {
         if(!departmentRepository.existsById(departmentId))
             throw  new ResourceNotFoundException("Department","Id",departmentId);
         return districtRepository.findAllByDepartmentId(departmentId,pageable);
     }
+    */
+
 /*
     @Override
     public District createDistrict(District district,Long departmentId) {
