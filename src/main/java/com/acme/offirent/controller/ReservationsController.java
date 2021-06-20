@@ -31,7 +31,7 @@ public class ReservationsController {
     @Autowired
     private ModelMapper mapper;
 
-    @Operation(summary = "Get all reservations by Account",description = "Get all reservations by given AccountId",tags = {"accounts"})
+    @Operation(summary = "Get all reservations by Account of OffiUser(client)",description = "Get all reservations by given AccountId for OffiUser(client)",tags = {"accounts"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Get all reservations by given AccountId",content =@Content(mediaType = "application/json") )
     })
@@ -61,7 +61,7 @@ public class ReservationsController {
         return resources;
     }
 
-    @Operation(summary = "Create Reservation ",description = "Create a new Reservation",tags = {"accounts"})
+    @Operation(summary = "Create Reservation with accountId of OffiUser(client)",description = "Create a new Reservation with accountId of OffiUser(client)",tags = {"accounts"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Create a new Reservation for given information",content =@Content(mediaType = "application/json") )
     })
@@ -71,7 +71,7 @@ public class ReservationsController {
                 reservationService.createReservation(convertToEntity(resource),accountId,officeId));
     }
 
-    @Operation(summary = "Delete Reservation",description = "Delete Reservation for given Id",tags = {"accounts"})
+    @Operation(summary = "Delete Reservation for given Id of OffiUser(client)",description = "Delete Reservation for given Id of OffiUser(client)",tags = {"accounts"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Delete Reservation for given Id",content =@Content(mediaType = "application/json") )
     })

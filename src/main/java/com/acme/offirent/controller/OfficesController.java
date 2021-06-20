@@ -48,7 +48,7 @@ public class OfficesController {
         return resources;
     }
 
-    @Operation(summary = "Get all offices by account",description = "Get all Offices by given Account Id",tags = {"accounts"})
+    @Operation(summary = "Get all offices by account of OffiProvider(owner)",description = "Get all Offices by given Account Id",tags = {"accounts"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Get all Offices by given Account Id",content =@Content(mediaType = "application/json") )
     })
@@ -71,7 +71,7 @@ public class OfficesController {
         return convertToResource(officeService.getOfficeById(officeId));
     }
 
-    @Operation(summary = "Create Office ",description = "Enter a new Office at register",tags = {"accounts"})
+    @Operation(summary = "Create Office with accountId of OffiProvider(owner)",description = "Enter a new Office at register",tags = {"accounts"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Enter a new office for given information",content =@Content(mediaType = "application/json") )
     })
