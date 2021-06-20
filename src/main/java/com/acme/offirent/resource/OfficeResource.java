@@ -22,5 +22,4 @@ public class OfficeResource {
     private float price;
     private boolean status;
     private String comment;
-    private District district;
 }
