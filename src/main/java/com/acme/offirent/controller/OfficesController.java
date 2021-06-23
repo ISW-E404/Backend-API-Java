@@ -134,11 +134,11 @@ public class OfficesController {
 
 
 
-    @Operation(summary = "Get the 5 offices with highest score",description = "Get the 5 offices with highest score",tags = {"offices"})
+    @Operation(summary = "Get offices order by higher score",description = "Get offices order by higher score",tags = {"offices"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Get Offices by higher score",content =@Content(mediaType = "application/json") )
     })
-    @GetMapping("/offices/score/fiveHighest")
+    @GetMapping("/offices/score/Higher")
     public List<OfficeResource> getAllOfficesByPriceLessThanEqual(Pageable pageable){
         Page<Office> resourcePage = officeService.getOfficesByScoreDesc(pageable);
         List<OfficeResource> resources = resourcePage.getContent()
