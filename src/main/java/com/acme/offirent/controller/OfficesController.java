@@ -85,7 +85,7 @@ public class OfficesController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Get all Offices by given price",content =@Content(mediaType = "application/json") )
     })
-    @GetMapping("/offices?price={price}")
+    @GetMapping("/offices/price/{price}")
     public List<OfficeResource> getAllOfficesByPriceLessThanEqual(@PathVariable(name = "price") Float price, Pageable pageable){
         Page<Office> resourcePage = officeService.getAllOfficesByPriceLessThanEqual(price, pageable);
         List<OfficeResource> resources = resourcePage.getContent()
@@ -98,9 +98,9 @@ public class OfficesController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Get all offices by given two prices",content =@Content(mediaType = "application/json") )
     })
-    @GetMapping("/offices?maxprice={price1}&minprice={price2}")
-    public List<OfficeResource> getAllOfficesByPriceLessThanEqualAndPriceGreaterThanEqual(@PathVariable(name = "price1") Float price1,@PathVariable(name = "price2") Float price2,  Pageable pageable){
-        Page<Office> resourcePage = officeService.getAllOfficesByPriceLessThanEqualAndPriceGreaterThanEqual(price2, price1, pageable);
+    @GetMapping("/offices/minPrice/{minPrice}/maxPrice/{maxPrice}")
+    public List<OfficeResource> getAllOfficesByPriceLessThanEqualAndPriceGreaterThanEqual(@PathVariable(name = "minPrice") Float minPrice,@PathVariable(name = "maxPrice") Float maxPrice,  Pageable pageable){
+        Page<Office> resourcePage = officeService.getAllOfficesByPriceLessThanEqualAndPriceGreaterThanEqual(minPrice, maxPrice, pageable);
         List<OfficeResource> resources = resourcePage.getContent()
                 .stream().map(this::convertToResource).collect(Collectors.toList());
         //return new PageImpl<>(resources,pageable, resources.size());
