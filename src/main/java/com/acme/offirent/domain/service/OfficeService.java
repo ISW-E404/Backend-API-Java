@@ -15,6 +15,8 @@ public interface OfficeService {
     Page<Office> getAllOfficesByAccountId(Long accountId, Pageable pageable);
     Page<Office> getAllOfficesByAccountEmail(String accountEmail, Pageable pageable);
 
+    Page<Office> getOfficesByScoreDescFirst5(Pageable pageable);
+
     Page<Office> getAllOfficesByPriceLessThanEqualAndPriceGreaterThanEqual(float price1, float price2, Pageable pageable);
     Office activeOffice(Long accountId, Long officeId);
     Office createOffice(Office office, Long accountId, Long districtId);

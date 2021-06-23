@@ -11,8 +11,6 @@ import com.acme.offirent.domain.service.OfficeService;
 import com.acme.offirent.domain.service.ReservationService;
 import com.acme.offirent.service.OfficeServiceImpl;
 import com.acme.offirent.service.ReservationServiceImpl;
-import io.cucumber.java.Before;
-import io.cucumber.java.bs.A;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -286,6 +284,6 @@ public class ReserveOfficeStepDefs {
         when(officeRepository.findById(officeId)).thenReturn(Optional.of(office));
         when(reservationRepository.save(reservation)).thenReturn(reservation);
 
-        assertThat(reservationService.createReservation(reservation, accountId, officeId)).isInstanceOfAny(Reservation.class);
+        assertThat(reservationService.createReservationWithAccountId(reservation, accountId, officeId)).isInstanceOfAny(Reservation.class);
     }
 }

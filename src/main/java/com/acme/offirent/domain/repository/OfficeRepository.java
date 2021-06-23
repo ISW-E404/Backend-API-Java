@@ -25,4 +25,7 @@ public interface OfficeRepository extends JpaRepository<Office, Long> {
 
        @Query("select o from Office o where o.price between ?1 and ?2")
        Optional<Page<Office>> findAllOfficesByPriceLessThanEqualAndPriceGreaterThanEqual(float price1, float price2, Pageable pageable);
+
+       @Query(value="select o from offices o order by o.score DESC LIMIT 5", nativeQuery = true)
+       Page<Office> findOfficesOrderByScoreDescFirst5 (Pageable pageable);
 }

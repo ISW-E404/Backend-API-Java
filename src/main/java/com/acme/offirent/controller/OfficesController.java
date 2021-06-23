@@ -136,13 +136,32 @@ public class OfficesController {
         return resources;
     }
 
+
+
+    @Operation(summary = "Get the 5 offices with highest score",description = "Get the 5 offices with highest score",tags = {"offices"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Get Offices by higher score",content =@Content(mediaType = "application/json") )
+    })
+    @GetMapping("/offices/score/fiveHighest")
+    public List<OfficeResource> getAllOfficesByPriceLessThanEqual(Pageable pageable){
+        Page<Office> resourcePage = officeService.getOfficesByScoreDescFirst5(pageable);
+        List<OfficeResource> resources = resourcePage.getContent()
+                .stream().map(this::convertToResource).collect(Collectors.toList());
+        //return new PageImpl<>(resources,pageable, resources.size());
+        return resources;
+    }
+
+
+
+
+
     @Operation(summary = "Update Offices",description = "Update Office for given Id",tags = {"offices"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Update information of office for given Id",content =@Content(mediaType = "application/json") )
     })
     @PutMapping("/offices/{id}")
-    public OfficeResource updateOffice(@PathVariable(name = "id")   Long officeId,@Valid @RequestBody OfficeResource resource){
-        return convertToResource(officeService.updateOffice(officeId,convertToUpdateResource(resource)));
+    public OfficeResource updateOffice(@PathVariable(name = "id")   Long officeId,@Valid @RequestBody SaveOfficeResource resource){
+        return convertToResource(officeService.updateOffice(officeId,convertToEntity(resource)));
     }
 
     @Operation(summary = "Active Offices",description = "Active a deactivated Office",tags = {"offices"})

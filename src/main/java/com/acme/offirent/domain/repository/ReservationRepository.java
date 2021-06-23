@@ -9,6 +9,9 @@ import java.util.Optional;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     Optional<Reservation> findByIdAndAccountId(Long id, Long accountId);
+    Optional<Reservation> findByIdAndAccountEmail(Long id, String accountEmail);
+
     Page<Reservation> findByAccountId(Long accountId, Pageable pageable);
+    Page<Reservation> findByAccountEmail(String accountEmail, Pageable pageable);
     Page<Reservation> findByOfficeId(Long officeId, Pageable pageable);
 }
