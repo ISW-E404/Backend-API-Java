@@ -33,7 +33,8 @@ public class DistrictServiceImpl implements DistrictService {
 
     @Override
     public District getDistrictByName(String name) {
-        return districtRepository.findByName(name);
+        return districtRepository.findByName(name)
+                .orElseThrow(()->new ResourceNotFoundException("District","Name",name));
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.acme.offirent.service;
 import com.acme.offirent.domain.model.Account;
 import com.acme.offirent.domain.repository.AccountRepository;
 import com.acme.offirent.domain.service.DefaultUserDetailsService;
+import com.acme.offirent.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -26,7 +27,8 @@ public class UserDetailsServiceImpl implements DefaultUserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String inputUsername) throws UsernameNotFoundException {
-        Account existingUser = accountRepository.findByEmail(inputUsername);
+        Account existingUser = accountRepository.findByEmail(inputUsername)
+                .orElseThrow(()-> new ResourceNotFoundException("Account","Username",inputUsername));
         String password = passwordEncoder.encode(existingUser.getPassword());
 
         if(existingUser.getEmail().equals(inputUsername)) {
