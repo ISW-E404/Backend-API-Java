@@ -86,8 +86,8 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
-    public Page<Office> getOfficesByScoreDescFirst5(Pageable pageable) {
-        return officeRepository.findOfficesOrderByScoreDescFirst5(pageable);
+    public Page<Office> getOfficesByScoreDesc(Pageable pageable) {
+        return officeRepository.findOfficesOrderByScoreDesc(pageable);
     }
 
 

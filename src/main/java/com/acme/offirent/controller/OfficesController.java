@@ -1,11 +1,8 @@
 package com.acme.offirent.controller;
 
-import com.acme.offirent.domain.model.Account;
 import com.acme.offirent.domain.model.Office;
 import com.acme.offirent.domain.service.OfficeService;
-import com.acme.offirent.resource.AccountResource;
 import com.acme.offirent.resource.OfficeResource;
-import com.acme.offirent.resource.SaveAccountResource;
 import com.acme.offirent.resource.SaveOfficeResource;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -14,7 +11,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -144,7 +140,7 @@ public class OfficesController {
     })
     @GetMapping("/offices/score/fiveHighest")
     public List<OfficeResource> getAllOfficesByPriceLessThanEqual(Pageable pageable){
-        Page<Office> resourcePage = officeService.getOfficesByScoreDescFirst5(pageable);
+        Page<Office> resourcePage = officeService.getOfficesByScoreDesc(pageable);
         List<OfficeResource> resources = resourcePage.getContent()
                 .stream().map(this::convertToResource).collect(Collectors.toList());
         //return new PageImpl<>(resources,pageable, resources.size());
