@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 public interface AccountService{
     Page <Account> getAllAccounts(Pageable pageable);
     Account getAccountById (Long accountId);
+    Account getAccountByEmail (String email);
     //Page <Account> getAllAccountsByReservationId(Long reservationId, Pageable pageable);
     //Page <Account> getAllAccountsByOfficeId(Long officeId, Pageable pageable);
 

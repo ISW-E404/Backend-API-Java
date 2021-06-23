@@ -57,6 +57,15 @@ public class AccountsController {
         return convertToResource(accountService.getAccountById(accountId));
     }
 
+    @Operation(summary = "Get Account by Email", description = "Get Account for given Email", tags = {"accounts"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Account returned", content = @Content(mediaType = "application/json"))
+    })
+    @GetMapping("/accounts/{email}")
+    public AccountResource getAccountById(@PathVariable(name = "email") String email){
+        return convertToResource(accountService.getAccountByEmail(email));
+    }
+
     @Operation(summary = "Create Account ",description = "Enter a new Account at register",tags = {"accounts"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Enter a new account for given information",content =@Content(mediaType = "application/json") )
