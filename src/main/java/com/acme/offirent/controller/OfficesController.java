@@ -62,6 +62,23 @@ public class OfficesController {
         return resources;
     }
 
+
+    @Operation(summary = "Get all offices by account of OffiProvider(owner)",description = "Get all Offices by given Account Email",tags = {"accounts"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Get all Offices by given Account Id",content =@Content(mediaType = "application/json") )
+    })
+    @GetMapping("/accounts/email/{accountEmail}/offices")
+    public List<OfficeResource> getAllOfficesByAccountEmail(@PathVariable(name = "accountEmail") String accountEmail,Pageable pageable) {
+
+        Page<Office> resourcePage = officeService.getAllOfficesByAccountEmail(accountEmail, pageable);
+        List<OfficeResource> resources = resourcePage.getContent()
+                .stream().map(this::convertToResource).collect(Collectors.toList());
+        //return new PageImpl<>(resources,pageable,resources.size());
+        return resources;
+    }
+
+
+
     @Operation(summary = "Get Office by Id", description = "Get Office for given Id", tags = {"offices"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Office returned", content = @Content(mediaType = "application/json"))
@@ -76,10 +93,22 @@ public class OfficesController {
             @ApiResponse(responseCode = "200", description = "Enter a new office for given information",content =@Content(mediaType = "application/json") )
     })
     @PostMapping("/accounts/{accountId}/District={districtId}/offices")
-    public OfficeResource createOffice(@PathVariable(name = "accountId") Long accountId, @PathVariable(name = "districtId") Long districtId, @Valid @RequestBody SaveOfficeResource resource){
+    public OfficeResource createOfficeWithAccountId(@PathVariable(name = "accountId") Long accountId, @PathVariable(name = "districtId") Long districtId, @Valid @RequestBody SaveOfficeResource resource){
         return convertToResource(
                 officeService.createOffice(convertToEntity(resource),accountId,districtId));
     }
+
+
+    @Operation(summary = "Create Office with accountEmail of OffiProvider(owner)",description = "Enter a new Office at register",tags = {"accounts"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Enter a new office for given information",content =@Content(mediaType = "application/json") )
+    })
+    @PostMapping("/accounts/email/{accountEmail}/District={districtId}/offices")
+    public OfficeResource createOfficeWithAccountEmail(@PathVariable(name = "accountEmail") String accountEmail, @PathVariable(name = "districtId") Long districtId, @Valid @RequestBody SaveOfficeResource resource){
+        return convertToResource(
+                officeService.createOfficeWithAccountEmail(convertToEntity(resource),accountEmail,districtId));
+    }
+
 
     @Operation(summary = "Get all the offices that have less or the same price",description = "Get all offices by given price",tags = {"offices"})
     @ApiResponses(value = {

@@ -13,10 +13,15 @@ import java.util.Optional;
 public interface OfficeRepository extends JpaRepository<Office, Long> {
        Page<Office> findAllByDistrictId (Long districtId, Pageable pageable);
 
+
        @Query("select o from Office o where o.price <= ?1")
        Optional<Page<Office>> findByPriceLessThanEqual (float price, Pageable pageable);
-       List<Office> findAllByAccountId(Long accountId);
+
+       List<Office> findAllByAccountId(Long accountId);  // solo para calcular cantidad de oficinas: lista.size()
        Page<Office> findAllByAccountId(Long accountId,Pageable pageable);
+
+       List<Office> findAllByAccountEmail(String accountEmail);
+       Page<Office> findAllByAccountEmail(String accountEmail, Pageable pageable);
 
        @Query("select o from Office o where o.price between ?1 and ?2")
        Optional<Page<Office>> findAllOfficesByPriceLessThanEqualAndPriceGreaterThanEqual(float price1, float price2, Pageable pageable);

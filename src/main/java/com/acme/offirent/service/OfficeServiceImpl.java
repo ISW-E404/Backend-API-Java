@@ -79,6 +79,15 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
+    public Page<Office> getAllOfficesByAccountEmail(String accountEmail, Pageable pageable) {
+        if(!accountRepository.existsByEmail(accountEmail))
+            throw new ResourceNotFoundException("Account","Email",accountEmail);
+        return  officeRepository.findAllByAccountEmail(accountEmail,pageable);
+    }
+
+
+
+    @Override
     public Office createOffice(Office office, Long accountId, Long districtId){
         return accountRepository.findById(accountId).map(account -> {
             int Quantity = officeRepository.findAllByAccountId(accountId).size();
@@ -94,6 +103,23 @@ public class OfficeServiceImpl implements OfficeService {
         }).orElseThrow( ()->new ResourceNotFoundException("Account","Id",accountId) );
 
     }
+
+    @Override
+    public Office createOfficeWithAccountEmail(Office office, String accountEmail, Long districtId) {
+        return accountRepository.findByEmail(accountEmail).map(account -> {
+            int Quantity = officeRepository.findAllByAccountEmail(accountEmail).size();
+            if (Quantity <=15 || account.isPremium()) {
+                District district = districtRepository.findById(districtId)
+                        .orElseThrow( ()->new ResourceNotFoundException("District","Id",districtId) );
+                office.setDistrict(district);
+                office.setAccount(account);
+                return officeRepository.save(office);
+            }
+            else
+                throw new LockedActionException("Cant create an Office due to user is not premium and cant have more than 15 offices");
+        }).orElseThrow( ()->new ResourceNotFoundException("Account","Email",accountEmail) );
+    }
+
 
     @Override
     public Office rateOffice(Long officeId, Office officeRequest) {

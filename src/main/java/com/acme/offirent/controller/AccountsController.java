@@ -102,7 +102,7 @@ public class AccountsController {
     }
 
 
-    
+
     @Operation(summary = "Delete Account By Email",description = "Delete Account for given Email",tags = {"accounts"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Delete Account for given Email",content =@Content(mediaType = "application/json") )

@@ -13,9 +13,13 @@ public interface OfficeService {
     Page<Office> getAllOfficesByDistrictId(Long districtId, Pageable pageable);
     Page<Office> getAllOfficesByPriceLessThanEqual (float price, Pageable pageable);
     Page<Office> getAllOfficesByAccountId(Long accountId, Pageable pageable);
+    Page<Office> getAllOfficesByAccountEmail(String accountEmail, Pageable pageable);
+
     Page<Office> getAllOfficesByPriceLessThanEqualAndPriceGreaterThanEqual(float price1, float price2, Pageable pageable);
     Office activeOffice(Long accountId, Long officeId);
     Office createOffice(Office office, Long accountId, Long districtId);
+    Office createOfficeWithAccountEmail(Office office, String accountEmail, Long districtId);
+
     Office rateOffice(Long officeId, Office officeRequest);
     Office updateOffice(Long officeId,Office officeRequest);
     ResponseEntity<?> deleteOffice(Long officeId);
