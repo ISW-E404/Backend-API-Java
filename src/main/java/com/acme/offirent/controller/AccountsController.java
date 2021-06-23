@@ -1,10 +1,7 @@
 package com.acme.offirent.controller;
 
 import com.acme.offirent.domain.model.Account;
-import com.acme.offirent.domain.model.District;
-import com.acme.offirent.domain.model.Resource;
 import com.acme.offirent.domain.service.AccountService;
-import com.acme.offirent.domain.service.DiscountService;
 import com.acme.offirent.resource.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -13,7 +10,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -76,14 +72,48 @@ public class AccountsController {
                 accountService.createAccount(convertToEntity(resource)));
     }
 
-    @Operation(summary = "Update Accounts",description = "Update an Account",tags = {"accounts"})
+    @Operation(summary = "Update Accounts by given Id",description = "Update an Account by given id",tags = {"accounts"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Change the account information",content =@Content(mediaType = "application/json") )
     })
     @PutMapping("/accounts/{accountId}")
-    public  AccountResource activeOffice(@PathVariable(name = "accountId")Long accountId,@Valid @RequestBody SaveAccountResource resource){
-        return  convertToResource(accountService.updateAccount(accountId,convertToEntity(resource)));
+    public  AccountResource updateAccountById(@PathVariable(name = "accountId")Long accountId,@Valid @RequestBody SaveAccountResource resource){
+        return  convertToResource(accountService.updateAccountById(accountId,convertToEntity(resource)));
     }
+
+
+    @Operation(summary = "Update Accounts by given Email",description = "Update an Account by given email",tags = {"accounts"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Change the account information",content =@Content(mediaType = "application/json") )
+    })
+    @PutMapping("/accounts/email/{email}")
+    public  AccountResource updateAccountByEmail(@PathVariable(name = "email")String email,@Valid @RequestBody SaveAccountResource resource){
+        return  convertToResource(accountService.updateAccountByEmail(email,convertToEntity(resource)));
+    }
+
+
+    @Operation(summary = "Delete Account By Id",description = "Delete Account for given Id",tags = {"accounts"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Delete Account for given Id",content =@Content(mediaType = "application/json") )
+    })
+    @DeleteMapping("/accounts/{accountId}")
+    public ResponseEntity<?> deleteAccountById(@PathVariable(name="accountId") Long accountId){
+        return accountService.deleteAccountById(accountId);
+    }
+
+
+    
+    @Operation(summary = "Delete Account By Email",description = "Delete Account for given Email",tags = {"accounts"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Delete Account for given Email",content =@Content(mediaType = "application/json") )
+    })
+    @DeleteMapping("/accounts/email/{email}")
+    public ResponseEntity<?> deleteAccountByEmail(@PathVariable(name="email") String email){
+        return accountService.deleteAccountByEmail(email);
+    }
+
+
+
 
     private Account convertToEntity(SaveAccountResource resource){return  mapper.map(resource, Account.class);}
 

@@ -39,18 +39,50 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account updateAccount(Long accountId, Account accountRequest) {
-        return accountRepository.save(accountRequest);
-        //TODO
+    public Account updateAccountById(Long accountId, Account accountRequest) {
+        return accountRepository.findById(accountId).map(account->{
+                account.setEmail(accountRequest.getEmail());
+                account.setFirstName(accountRequest.getFirstName());
+                account.setLastName(accountRequest.getLastName());
+                account.setIdentification(accountRequest.getIdentification());
+                account.setPassword(accountRequest.getPassword());
+                account.setPhone(accountRequest.getPhone());
+                return  accountRepository.save(account);
+        }).orElseThrow(()-> new ResourceNotFoundException("Account","Id",accountId));
+
     }
 
     @Override
-    public ResponseEntity<?> deleteAccount(Long accountId) {
+    public Account updateAccountByEmail(String email, Account accountRequest) {
+        return accountRepository.findByEmail(email).map(account->{
+            account.setEmail(accountRequest.getEmail());
+            account.setFirstName(accountRequest.getFirstName());
+            account.setLastName(accountRequest.getLastName());
+            account.setIdentification(accountRequest.getIdentification());
+            account.setPassword(accountRequest.getPassword());
+            account.setPhone(accountRequest.getPhone());
+            return  accountRepository.save(account);
+        }).orElseThrow(()-> new ResourceNotFoundException("Account","Email",email));
+    }
+
+
+    @Override
+    public ResponseEntity<?> deleteAccountById(Long accountId) {
         return accountRepository.findById(accountId).map(account->{
             accountRepository.delete(account);
             return ResponseEntity.ok().build();
         })
                 .orElseThrow(()->
                         new ResourceNotFoundException("Account","Id",accountId));
+    }
+
+    @Override
+    public ResponseEntity<?> deleteAccountByEmail(String email) {
+        return accountRepository.findByEmail(email).map(account->{
+            accountRepository.delete(account);
+            return ResponseEntity.ok().build();
+        })
+                .orElseThrow(()->
+                        new ResourceNotFoundException("Account","Email",email));
     }
 }

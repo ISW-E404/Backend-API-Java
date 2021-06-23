@@ -13,6 +13,8 @@ public interface AccountService{
     //Page <Account> getAllAccountsByOfficeId(Long officeId, Pageable pageable);
 
     Account createAccount(Account account);
-    Account updateAccount(Long accountId, Account accountRequest);
-    ResponseEntity<?> deleteAccount(Long accountId);
+    Account updateAccountById(Long accountId, Account accountRequest);
+    Account updateAccountByEmail(String email, Account accountRequest);
+    ResponseEntity<?> deleteAccountById(Long accountId);
+    ResponseEntity<?> deleteAccountByEmail(String email);
 }
