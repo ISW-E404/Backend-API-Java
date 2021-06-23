@@ -48,7 +48,7 @@ public class DistrictsController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "District returned", content = @Content(mediaType = "application/json"))
     })
-    @GetMapping("/districts/{name}")
+    @GetMapping("/districts/name/{name}")
     public DistrictResource getDistrictByName(@PathVariable(name = "name") String name){
         return convertToResource(districtService.getDistrictByName(name));
     }
