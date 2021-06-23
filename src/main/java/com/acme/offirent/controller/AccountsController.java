@@ -62,7 +62,7 @@ public class AccountsController {
             @ApiResponse(responseCode = "200", description = "Account returned", content = @Content(mediaType = "application/json"))
     })
     @GetMapping("/accounts/{email}")
-    public AccountResource getAccountById(@PathVariable(name = "email") String email){
+    public AccountResource getAccountByName(@PathVariable(name = "email") String email){
         return convertToResource(accountService.getAccountByEmail(email));
     }
 

@@ -43,6 +43,16 @@ public class DistrictsController {
         return convertToResource(districtService.getDistrictById(districtId));
     }
 
+
+    @Operation(summary = "Get District by Name", description = "Get District for given Name", tags = {"districts"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "District returned", content = @Content(mediaType = "application/json"))
+    })
+    @GetMapping("/districts/{name}")
+    public DistrictResource getDistrictByName(@PathVariable(name = "name") String name){
+        return convertToResource(districtService.getDistrictByName(name));
+    }
+
     @Operation(summary = "Get all districts",description = "Get all districts",tags = {"districts"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Get all districts",content =@Content(mediaType = "application/json") )

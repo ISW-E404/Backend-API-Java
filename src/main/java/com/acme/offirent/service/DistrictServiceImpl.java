@@ -32,6 +32,11 @@ public class DistrictServiceImpl implements DistrictService {
     }
 
     @Override
+    public District getDistrictByName(String name) {
+        return districtRepository.findByName(name);
+    }
+
+    @Override
     public Page<District> getAllDistricts(Pageable pageable) {
         return districtRepository.findAll(pageable);
     }

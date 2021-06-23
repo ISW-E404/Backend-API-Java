@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface DistrictService {
     District getDistrictById(Long districtId);
+    District getDistrictByName(String name);
     Page<District> getAllDistricts(Pageable pageable);
     //Page<District> getAllDistrictsByDepartmentId(Long departmentId, Pageable pageable);
     //District createDistrict(District district, Long departmentId);
