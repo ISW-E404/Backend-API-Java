@@ -15,4 +15,6 @@ public class ResourceResource {
 
     private String comment;
 
+    private Long officeId;
+
 }

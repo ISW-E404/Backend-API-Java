@@ -43,6 +43,6 @@ public class Reservation {
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name = "office_id",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    //@JsonIgnore
     private Office office;
 }
