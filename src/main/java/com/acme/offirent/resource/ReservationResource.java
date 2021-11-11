@@ -14,5 +14,5 @@ public class ReservationResource {
     private Date initialDate;
     private Date endDate;
 
-
+    private Long officeId;
 }
