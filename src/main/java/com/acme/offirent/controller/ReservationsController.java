@@ -76,7 +76,7 @@ public class ReservationsController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Get all reservations by given AccountEmail",content =@Content(mediaType = "application/json") )
     })
-    @GetMapping("/accounts/{accountEmail}/reservations")
+    @GetMapping("/accounts/email/{accountEmail}/reservations")
     public List<ReservationResource> getAllReservationsByAccountEmail(
             @PathVariable(name = "accountEmail") String accountEmail, Pageable pageable){
 
@@ -119,7 +119,7 @@ public class ReservationsController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Create a new Reservation for given information",content =@Content(mediaType = "application/json") )
     })
-    @PostMapping("/accounts/{accountEmail}/Office={officeId}/reservations")
+    @PostMapping("/accounts/email/{accountEmail}/Office={officeId}/reservations")
     public ReservationResource createReservationWithAccountEmail(@PathVariable(name = "accountEmail") String  accountEmail,@PathVariable(name = "officeId") Long officeId, @Valid @RequestBody SaveReservationResource resource){
         return convertToResource(
                 reservationService.createReservationWithAccountEmail(convertToEntity(resource),accountEmail,officeId));
